@@ -6,5 +6,37 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title><%= htmlWebpackPlugin.options.title %></title>
   </head>
-  <body></body>
+  <body>
+    <div class="page-container">
+      <header>
+        <div>TODO List</div>
+        <div class="header-divider"></div>
+      </header>
+      <main>
+        <div class="left-panel">
+          <div class="title-container">
+            <div class="filters titles">Home</div>
+            <div class="divider"></div>
+          </div>
+
+          <div class="all-tasks-filter">All Tasks</div>
+          <div class="today-filter">Today</div>
+          <div class="seven-days-filter">Next 7 Days</div>
+          <div class="important-filter">Important</div>
+
+          <div class="title-container">
+            <div class="projects titles">Projects</div>
+            <div class="divider"></div>
+          </div>
+          <div class="project-names-div"></div>
+          <button class="add-project-btn">Add Project</button>
+        </div>
+        <div class="right-panel">
+          <div class="filter-display-div">PLACEHOLDER</div>
+          <div class="todo-list-div">TODOS PLACEHOLDER</div>
+        </div>
+      </main>
+      <footer>VycMajoris</footer>
+    </div>
+  </body>
 </html>

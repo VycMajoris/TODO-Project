@@ -1,0 +1,154 @@
+:root {
+  --main-clr-100: rgb(34, 48, 60);
+  --main-clr-500: rgb(25, 39, 52);
+  --main-clr-900: rgb(21, 32, 43);
+  --secondary-clr-100: rgb(42, 189, 103);
+  --secondary-clr-500: rgb(31, 141, 77);
+  --secondary-clr-900: rgb(30, 101, 69);
+}
+
+*,
+*::before,
+*::after {
+  box-sizing: border-box;
+}
+/*
+    2. Remove default margin
+  */
+* {
+  margin: 0;
+}
+/*
+    3. Allow percentage-based heights in the application
+  */
+html,
+body {
+  height: 100%;
+}
+/*
+    Typographic tweaks!
+    4. Add accessible line-height
+    5. Improve text rendering
+  */
+body {
+  line-height: 1.5;
+  -webkit-font-smoothing: antialiased;
+}
+/*
+    6. Improve media defaults
+  */
+img,
+picture,
+video,
+canvas,
+svg {
+  display: block;
+  max-width: 100%;
+}
+/*
+    7. Remove built-in form typography styles
+  */
+input,
+button,
+textarea,
+select {
+  font: inherit;
+}
+/*
+    8. Avoid text overflows
+  */
+p,
+h1,
+h2,
+h3,
+h4,
+h5,
+h6 {
+  overflow-wrap: break-word;
+}
+/*
+    9. Create a root stacking context
+  */
+#root,
+#__next {
+  isolation: isolate;
+}
+
+/*********** Page Container **********/
+
+.page-container {
+  height: 100dvh;
+  display: grid;
+  grid-template-rows: 4rem 1fr 2rem;
+}
+
+/*************** Header, Footer **************/
+
+header,
+footer {
+  background-color: var(--main-clr-100);
+  color: var(--secondary-clr-500);
+  font-size: 2rem;
+  text-align: center;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+}
+
+footer {
+  font-size: 1.25rem;
+}
+
+/*************** Main **************/
+
+main {
+  display: grid;
+  grid-template-columns: 15fr 85fr;
+  background-color: var(--main-clr-500);
+  color: white;
+}
+
+/****** Left Panel *****/
+
+.left-panel {
+  background-color: var(--main-clr-900);
+  display: flex;
+  flex-direction: column;
+  gap: 1rem;
+  padding: 1rem;
+}
+
+.title-container {
+  display: flex;
+  flex-direction: column;
+  gap: 0.125rem;
+}
+
+.titles {
+  font-size: 1.5rem;
+}
+
+.divider {
+  background-color: white;
+  height: 0.125rem;
+  width: 100%;
+}
+
+/****** Right Panel *****/
+
+.right-panel {
+  background-color: inherit;
+  padding: 1.5rem 2.5rem;
+  display: grid;
+  grid-template-rows: 6% 1fr;
+  gap: 1.25rem;
+}
+
+.filter-display-div {
+  background-color: var(--secondary-clr-100);
+  padding: 1rem;
+}
+
+.todo-list-div {
+  padding: 1rem;
+}
