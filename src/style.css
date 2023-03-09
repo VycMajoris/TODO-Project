@@ -208,3 +208,22 @@ main {
 .todo-list-container {
   padding: 1rem;
 }
+
+/**** TASK POPUP ****/
+
+.task-popup {
+  display: none;
+}
+
+.add-task-form {
+  display: flex;
+  flex-direction: column;
+  gap: 0.25rem;
+}
+
+.task-btn-container {
+  display: flex;
+  justify-content: center;
+  gap: 0.75rem;
+  margin-top: 0.25rem;
+}

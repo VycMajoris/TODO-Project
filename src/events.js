@@ -33,10 +33,4 @@ export default function eventsFunc() {
     console.log(projects);
     projectNameInput.value = "";
   });
-
-  const individualProjectContainer = document.querySelector(
-    ".individual-project-container"
-  );
-
-  individualProjectContainer.addEventListener("click", createTaskAddBtn);
 }

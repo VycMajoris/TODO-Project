@@ -56,7 +56,34 @@
 
         <div class="right-panel">
           <div class="filter-display-div">PLACEHOLDER</div>
-          <div class="todo-list-container">No tasks at the moment.</div>
+          <div class="todo-list-container">
+            No tasks at the moment.
+            <div class="task-popup">
+              <form action="" class="add-task-form">
+                <label for="title">Title:</label>
+                <input
+                  type="text"
+                  name="taskTitle"
+                  required
+                  id="title"
+                  placeholder="What to do?"
+                />
+                <label for="details">Details(Optional):</label>
+                <input
+                  type="text"
+                  id="details"
+                  placeholder="Any details?"
+                  name="taskDetails"
+                />
+                <label for="date">Date:</label>
+                <input type="date" name="taskDate" id="date" />
+                <div class="task-btn-container">
+                  <button class="add-btn" type="submit">Add</button>
+                  <button class="cancel-btn" type="reset">Cancel</button>
+                </div>
+              </form>
+            </div>
+          </div>
         </div>
       </main>
       <footer>VycMajoris</footer>

@@ -1,3 +1,3 @@
 export const projects = [];
 
-export default function projectFunc(projectName) {}
+export default function projectCreateFunc(projectName) {}
