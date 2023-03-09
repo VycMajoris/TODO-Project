@@ -3,7 +3,9 @@ import {
   createTodoListContainer,
   createTaskAddBtn,
 } from "./create_element";
-import { projects } from "./projects";
+import { projects, createTodosFunc } from "./projects";
+
+/* Some event listeners are created in create_element.js */
 
 export default function eventsFunc() {
   const addProjectBtn = document.querySelector(".add-project-btn");
@@ -25,6 +27,7 @@ export default function eventsFunc() {
   });
 
   const addProjectForm = document.querySelector(".add-project-form");
+  const addTaskForm = document.querySelector(".add-task-form");
 
   addProjectForm.addEventListener("submit", (e) => {
     e.preventDefault();
@@ -33,4 +36,19 @@ export default function eventsFunc() {
     console.log(projects);
     projectNameInput.value = "";
   });
+
+  /*   addTaskForm.addEventListener("submit", (e) => {
+    e.preventDefault();
+    const addTaskBtn = document.querySelector(".add-task-btn");
+    const projectName = addTaskBtn.id;
+    const title = document.getElementById("title");
+    const details = document.getElementById("details");
+    const date = document.getElementById("date");
+
+    const obj1 = {projectName, }
+
+    projects.push({addTaskBtn.id, });
+    console.log(projects);
+    projectNameInput.value = "";
+  }); */
 }
