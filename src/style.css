@@ -93,6 +93,19 @@ footer {
   display: flex;
   flex-direction: column;
   justify-content: center;
+  align-items: center;
+}
+
+.header-title {
+  display: flex;
+  align-items: center;
+  flex-grow: 1;
+}
+
+.header-divider {
+  height: 0.125rem;
+  width: 100%;
+  background-color: var(--secondary-clr-100);
 }
 
 footer {
@@ -134,6 +147,49 @@ main {
   width: 100%;
 }
 
+.filter-section,
+.project-section {
+  display: flex;
+  flex-direction: column;
+  gap: 0.75rem;
+}
+
+.add-project-btn {
+  padding: 0.25rem 0.75rem;
+  max-width: max-content;
+  align-self: center;
+}
+
+.add-project-form {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.5rem;
+}
+
+.project-name-input {
+  flex-basis: 90%;
+  flex-grow: 1;
+}
+
+.add-btn,
+.cancel-btn {
+  display: inline-block;
+  justify-content: center;
+  align-items: center;
+}
+
+.add-project-popup-div {
+  display: none;
+}
+
+.individual-project-container {
+  width: 80%;
+  height: 2rem;
+  margin: 1rem;
+  background-color: red;
+  color: white;
+}
+
 /****** Right Panel *****/
 
 .right-panel {
@@ -149,6 +205,6 @@ main {
   padding: 1rem;
 }
 
-.todo-list-div {
+.todo-list-container {
   padding: 1rem;
 }

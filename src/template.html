@@ -9,31 +9,54 @@
   <body>
     <div class="page-container">
       <header>
-        <div>TODO List</div>
+        <div class="header-title">TODO List</div>
         <div class="header-divider"></div>
       </header>
       <main>
         <div class="left-panel">
-          <div class="title-container">
-            <div class="filters titles">Home</div>
-            <div class="divider"></div>
-          </div>
+          <!-- filter section -->
+          <section class="filter-section">
+            <div class="title-container">
+              <div class="filters titles">Home</div>
+              <div class="divider"></div>
+            </div>
 
-          <div class="all-tasks-filter">All Tasks</div>
-          <div class="today-filter">Today</div>
-          <div class="seven-days-filter">Next 7 Days</div>
-          <div class="important-filter">Important</div>
+            <div class="all-tasks-filter">All Tasks</div>
+            <div class="today-filter">Today</div>
+            <div class="seven-days-filter">Next 7 Days</div>
+            <div class="important-filter">Important</div>
+          </section>
+          <!-- projects section -->
+          <section class="project-section">
+            <div class="title-container">
+              <div class="projects titles">Projects</div>
+              <div class="divider"></div>
+            </div>
+            <div class="project-names-container">
+              <div class="add-project-popup-div">
+                <form action="" class="add-project-form">
+                  <input
+                    type="text"
+                    class="project-name-input"
+                    name="projectName"
+                    required
+                  />
+                  <button class="add-btn" type="submit">Add</button>
+                  <button class="cancel-btn" type="reset">Cancel</button>
+                </form>
+              </div>
+            </div>
+            <!-- form to add projects-->
 
-          <div class="title-container">
-            <div class="projects titles">Projects</div>
-            <div class="divider"></div>
-          </div>
-          <div class="project-names-div"></div>
-          <button class="add-project-btn">Add Project</button>
+            <button class="add-project-btn" name="add-project-btn">
+              Add Project
+            </button>
+          </section>
         </div>
+
         <div class="right-panel">
           <div class="filter-display-div">PLACEHOLDER</div>
-          <div class="todo-list-div">TODOS PLACEHOLDER</div>
+          <div class="todo-list-container">No tasks at the moment.</div>
         </div>
       </main>
       <footer>VycMajoris</footer>
