@@ -32,12 +32,12 @@ export default function eventsFunc() {
   addProjectForm.addEventListener("submit", (e) => {
     e.preventDefault();
     createProjectDiv(projectNameInput.value);
-    projects.push(projectNameInput.value);
-    console.log(projects);
+    /* projects.push(projectNameInput.value); */
+    /* console.log(projects); */
     projectNameInput.value = "";
   });
 
-  /*   addTaskForm.addEventListener("submit", (e) => {
+  addTaskForm.addEventListener("submit", (e) => {
     e.preventDefault();
     const addTaskBtn = document.querySelector(".add-task-btn");
     const projectName = addTaskBtn.id;
@@ -45,10 +45,28 @@ export default function eventsFunc() {
     const details = document.getElementById("details");
     const date = document.getElementById("date");
 
-    const obj1 = {projectName, }
+    let project = projects.find((p) => p.projectTitle === projectName);
+    /*     if (project) {
+      project.tasks.push(
+        createTodosFunc(title.value, details.value, date.value)
+      );
+      projects.push(project);
+    } */
 
-    projects.push({addTaskBtn.id, });
+    if (!project) {
+      project = {
+        projectTitle: projectName,
+        tasks: [],
+      };
+
+      projects.push(project);
+    }
+    project.tasks.push(createTodosFunc(title.value, details.value, date.value));
+
+    /* projects.push({addTaskBtn.id, }); */
     console.log(projects);
+    console.log(projectName);
+
     projectNameInput.value = "";
-  }); */
+  });
 }

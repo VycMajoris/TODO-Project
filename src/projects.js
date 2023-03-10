@@ -1,6 +1,12 @@
-export const projects = [
+export const projects = [];
+
+export function createTodosFunc(title, details, date) {
+  return { title, details, date };
+}
+
+/* export const projects = [
   {
-    projectName: "Project 1",
+    projectTitle: "Project 1",
     tasks: [
       {
         title: "Task 1",
@@ -14,8 +20,4 @@ export const projects = [
       },
     ],
   },
-];
-
-export function createTodosFunc(title, details, date) {
-  return { title, details, date };
-}
+]; */
