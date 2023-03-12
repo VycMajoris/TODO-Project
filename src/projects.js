@@ -1,10 +1,10 @@
 export const projects = [];
 
-export function createTodosFunc(title, details, date) {
-  return { title, details, date };
+export function createTodosFunc(title, details, date, complete, important) {
+  return { title, details, date, complete, important };
 }
-
-/* export const projects = [
+/* 
+export const projects = [
   {
     projectTitle: "Project 1",
     tasks: [

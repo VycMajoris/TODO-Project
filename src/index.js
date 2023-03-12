@@ -1,4 +1,4 @@
-import eventsFunc from "./events";
+import { eventsFunc } from "./events";
 import "./style.css";
 
 eventsFunc();

@@ -167,7 +167,7 @@ main {
 }
 
 .project-name-input {
-  flex-basis: 90%;
+  flex-basis: 100%;
   flex-grow: 1;
 }
 
@@ -206,7 +206,39 @@ main {
 }
 
 .todo-list-container {
+  display: flex;
+  flex-direction: column;
+  gap: 1.25rem;
   padding: 1rem;
+}
+
+.tasks-container {
+  display: flex;
+  flex-direction: column;
+  gap: 1.25rem;
+}
+.todo-display-container {
+  display: flex;
+  border: 2px solid rgb(255, 255, 255);
+  gap: 2rem;
+  padding: 1rem;
+}
+
+.todo-display-container img {
+  min-width: 24px;
+}
+
+.todo-display-left {
+  display: flex;
+  flex-grow: 1;
+  gap: 1rem;
+  align-items: center;
+}
+
+.todo-display-right {
+  display: flex;
+  align-items: center;
+  gap: 1rem;
 }
 
 /**** TASK POPUP ****/
@@ -226,4 +258,11 @@ main {
   justify-content: center;
   gap: 0.75rem;
   margin-top: 0.25rem;
+}
+
+.unchecked,
+.checked {
+  min-height: 24px;
+  max-height: 48px;
+  border-color: white;
 }
