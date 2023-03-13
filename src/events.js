@@ -1,5 +1,9 @@
 // eslint-disable-next-line import/no-cycle
-import { createProjectDiv, addProjectsToPage } from "./create_element";
+import {
+  createProjectDiv,
+  addProjectsToPage,
+  createIndividualTodoContainer,
+} from "./create_element";
 
 import { projects, createTodosFunc } from "./projects";
 
@@ -26,6 +30,7 @@ export function eventsFunc() {
 
   const addProjectForm = document.querySelector(".add-project-form");
   const addTaskForm = document.querySelector(".add-task-form");
+  const editTaskForm = document.querySelector(".edit-task-form");
 
   addProjectForm.addEventListener("submit", (e) => {
     e.preventDefault();
@@ -35,9 +40,34 @@ export function eventsFunc() {
     /* console.log(projects); */
   });
 
-  addTaskForm.addEventListener("submit", submitForm);
+  /*   addTaskForm.addEventListener("submit", (e) => {
+    e.preventDefault();
+    const addTaskBtn = document.querySelector(".add-task-btn");
+    const projectName = addTaskBtn.id;
+    const title = document.getElementById("title");
+    const details = document.getElementById("details");
+    const date = document.getElementById("date");
 
-  editForm();
+    let project = projects.find((p) => p.projectTitle === projectName);
+
+
+    if (!project) {
+      project = {
+        projectTitle: projectName,
+        tasks: [],
+      };
+
+      projects.push(project);
+    }
+    project.tasks.push(
+      createTodosFunc(title.value, details.value, date.value, false, false)
+    );
+
+    projectNameInput.value = "";
+    addProjectsToPage();
+  }); */
+
+  addTaskForm.addEventListener("submit", submitForm);
 
   const taskPopup = document.querySelector(".task-popup");
 
@@ -50,9 +80,24 @@ export function eventsFunc() {
   addTaskFormBtn.addEventListener("click", () => {
     taskPopup.style.display = "none";
   });
+
+  editTaskForm.addEventListener("click", editForm);
+
+  const editTaskPopup = document.querySelector(".edit-task-popup");
+
+  const editFormCancelBtn = document.querySelector(".edit-form-cancel-btn");
+  editFormCancelBtn.addEventListener("click", () => {
+    editTaskPopup.style.display = "none";
+  });
+
+  const editTaskFormBtn = document.querySelector(".edit-task-form-btn");
+  editTaskFormBtn.addEventListener("click", () => {
+    editTaskPopup.style.display = "none";
+  });
 }
 
-export function submitForm(e, editOption, titleVal, todoEdit) {
+// Submit Form:
+export function submitForm(e) {
   e.preventDefault();
 
   const addTaskBtn = document.querySelector(".add-task-btn");
@@ -64,31 +109,17 @@ export function submitForm(e, editOption, titleVal, todoEdit) {
 
   let project = projects.find((p) => p.projectTitle === projectName);
 
-  if (editOption) {
-    /* project = projects.find((p) => p.projectTitle === titleVal); */
-    const taskIndex = project.tasks.findIndex((t) => t.title === titleVal);
+  if (!project) {
+    project = {
+      projectTitle: projectName,
+      tasks: [],
+    };
 
-    project.tasks[taskIndex] = createTodosFunc(
-      title.value,
-      details.value,
-      date.value,
-      false,
-      false
-    );
-  } else {
-    if (!project) {
-      project = {
-        projectTitle: projectName,
-        tasks: [],
-      };
-
-      projects.push(project);
-    }
-    project.tasks.push(
-      createTodosFunc(title.value, details.value, date.value, false, false)
-    );
-    console.log("second");
+    projects.push(project);
   }
+  project.tasks.push(
+    createTodosFunc(title.value, details.value, date.value, false, false)
+  );
 
   addProjectsToPage();
   title.value = "";
@@ -96,9 +127,29 @@ export function submitForm(e, editOption, titleVal, todoEdit) {
   date.value = "";
 }
 
-export function editForm() {
-  const todoEdit = document.querySelector(".todo-edit-form");
-  todoEdit.addEventListener("submit", (e) => {
-    submitForm(e, true, null, todoEdit);
-  });
+// Edit Form:
+export function editForm(e) {
+  e.preventDefault();
+  const addTaskBtn = document.querySelector(".add-task-btn");
+  const projectName = addTaskBtn.id;
+  const title = document.getElementById("edit-title");
+  const details = document.getElementById("edit-details");
+  const date = document.getElementById("edit-date");
+  const todoEdit = createIndividualTodoContainer.todoEditAccess;
+
+  console.log("todoEdit");
+  console.log(todoEdit);
+  const project = projects.find((p) => p.projectTitle === addTaskBtn.id);
+  const taskIndex = project.tasks.findIndex((t) => t.title === todoEdit);
+  // const taskIndex = todoEdit.parentElement.parentElement.parentElement.id;
+
+  console.log("index: ");
+  console.log(taskIndex);
+
+  project.tasks[taskIndex].title = title.value;
+  project.tasks[taskIndex].details = details.value;
+  project.tasks[taskIndex].date = date.value;
+  console.log("projects edited:");
+  console.log(projects);
+  addProjectsToPage();
 }

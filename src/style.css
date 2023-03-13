@@ -243,11 +243,13 @@ main {
 
 /**** TASK POPUP ****/
 
-.task-popup {
+.task-popup,
+.edit-task-popup {
   display: none;
 }
 
-.add-task-form {
+.add-task-form,
+.edit-task-form {
   display: flex;
   flex-direction: column;
   gap: 0.25rem;

@@ -83,6 +83,33 @@
                 </div>
               </form>
             </div>
+            <div class="edit-task-popup">
+              <form action="" class="edit-task-form">
+                <label for="title">Title:</label>
+                <input
+                  type="text"
+                  name="taskTitle"
+                  required
+                  id="edit-title"
+                  placeholder="What to do?"
+                />
+                <label for="details">Details(Optional):</label>
+                <input
+                  type="text"
+                  id="edit-details"
+                  placeholder="Any details?"
+                  name="taskDetails"
+                />
+                <label for="date">Date:</label>
+                <input type="date" name="taskDate" id="edit-date" />
+                <div class="task-btn-container">
+                  <button class="edit-task-form-btn" type="submit">Add</button>
+                  <button class="edit-form-cancel-btn" type="reset">
+                    Cancel
+                  </button>
+                </div>
+              </form>
+            </div>
             <div class="tasks-container"></div>
           </div>
         </div>

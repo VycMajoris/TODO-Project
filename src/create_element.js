@@ -6,7 +6,7 @@ import DeleteIcon from "../assets/images/icons/delete.png";
 import EditIcon from "../assets/images/icons/edit.png";
 import StarCheckedIcon from "../assets/images/icons/star_checked.png";
 import StarUncheckedIcon from "../assets/images/icons/star_unchecked.png";
-import { projects } from "./projects";
+import { projects, createTodosFunc } from "./projects";
 // eslint-disable-next-line import/no-cycle
 import { submitForm } from "./events";
 
@@ -74,6 +74,8 @@ export function createIndividualTodoContainer(
   order
 ) {
   const taskPopup = document.querySelector(".task-popup");
+  const editTaskPopup = document.querySelector(".edit-task-popup");
+
   const addTaskBtn = document.querySelector(".add-task-btn");
   const tasksContainer = document.querySelector(".tasks-container");
   /* tasksContainer.innerHTML = ""; */
@@ -84,6 +86,10 @@ export function createIndividualTodoContainer(
   const todoEdit = document.createElement("div");
   // todoEdit.setAttribute("data-custom-edit", title);
   todoEdit.setAttribute("class", title);
+  todoEdit.setAttribute("data-custom", "todoEditData");
+
+  createIndividualTodoContainer.todoEditAccess = todoEdit.getAttribute("class");
+
   // const dataCustomEdit = todoEdit.getAttribute("data-custom-edit");
   const task = project.tasks.find(
     (t) => t.title === todoEdit.getAttribute("class")
@@ -177,18 +183,21 @@ export function createIndividualTodoContainer(
   });
 
   todoEdit.addEventListener("click", () => {
-    taskPopup.style.display = "block";
+    editTaskPopup.style.display = "block";
     const titleInput = document.getElementById("title");
     const detailsInput = document.getElementById("details");
     const dateInput = document.getElementById("date");
     titleInput.value = task.title;
     detailsInput.value = task.details;
     dateInput.value = task.date;
-    const addTaskForm = document.querySelector(".add-task-form");
+    const editTaskForm = document.querySelector(".edit-task-form");
     const event = new Event("submit");
-    console.log("task.title in todoEdit");
-    console.log(task.title);
-    submitForm(event, true, task.title, todoEdit);
+
+    /* submitForm(event, true, task.title, todoEdit); */
+  });
+
+  todoEdit.addEventListener("submit", () => {
+    createTodosFunc(title.value, details.value, date.value, false, false);
   });
 }
 
