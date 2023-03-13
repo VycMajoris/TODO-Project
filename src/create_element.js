@@ -85,15 +85,15 @@ export function createIndividualTodoContainer(
   const project = projects.find((p) => p.projectTitle === addTaskBtn.id);
   const todoEdit = document.createElement("div");
   // todoEdit.setAttribute("data-custom-edit", title);
-  todoEdit.setAttribute("class", title);
+  todoEdit.setAttribute("class", order);
   todoEdit.setAttribute("data-custom", "todoEditData");
 
-  createIndividualTodoContainer.todoEditAccess = todoEdit.getAttribute("class");
+  console.log("createIndividualTodoContainer.todoEditAccess");
+  console.log(createIndividualTodoContainer.todoEditAccess);
 
   // const dataCustomEdit = todoEdit.getAttribute("data-custom-edit");
-  const task = project.tasks.find(
-    (t) => t.title === todoEdit.getAttribute("class")
-  );
+  const task = project.tasks.find((t) => t.index === order);
+
   todoDisplayContainer.setAttribute("class", "todo-display-container");
   todoDisplayContainer.setAttribute("id", order);
   const leftSide = document.createElement("div");
@@ -184,26 +184,28 @@ export function createIndividualTodoContainer(
 
   todoEdit.addEventListener("click", () => {
     editTaskPopup.style.display = "block";
-    const titleInput = document.getElementById("title");
-    const detailsInput = document.getElementById("details");
-    const dateInput = document.getElementById("date");
+    createIndividualTodoContainer.todoEditAccess = order;
+
+    const titleInput = document.getElementById("edit-title");
+    const detailsInput = document.getElementById("edit-details");
+    const dateInput = document.getElementById("edit-date");
+
     titleInput.value = task.title;
     detailsInput.value = task.details;
     dateInput.value = task.date;
+
     const editTaskForm = document.querySelector(".edit-task-form");
     const event = new Event("submit");
-
-    /* submitForm(event, true, task.title, todoEdit); */
   });
 
-  todoEdit.addEventListener("submit", () => {
+  /*   todoEdit.addEventListener("submit", () => {
     createTodosFunc(title.value, details.value, date.value, false, false);
-  });
+  }); */
 }
 
 export function addProjectsToPage() {
   const tasksContainer = document.querySelector(".tasks-container");
-  tasksContainer.innerHTML = "";
+  tasksContainer.innerText = "";
   const addTaskBtn = document.querySelector(".add-task-btn");
 
   let project = projects.find((p) => p.projectTitle === addTaskBtn.id);
