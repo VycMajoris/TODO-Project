@@ -13,6 +13,7 @@ import { submitForm } from "./events";
 var md5 = require("md5");
 
 export function createProjectDiv(text) {
+  const projectNameDisplay = document.querySelector(".filter-display-div");
   const div = document.createElement("div");
   const projectContainer = document.querySelector(".project-names-container");
   const noTaskPara = document.querySelector(".no-task");
@@ -27,6 +28,7 @@ export function createProjectDiv(text) {
     if (noTaskPara !== undefined) todoListContainer.removeChild(noTaskPara);
   });
   div.addEventListener("click", () => {
+    projectNameDisplay.innerHTML = text;
     const buttonElements = todoListContainer.querySelectorAll("button");
     // to prevent from adding more than one button
     for (let i = 0; i < buttonElements.length; i++) {
@@ -38,6 +40,8 @@ export function createProjectDiv(text) {
   div.addEventListener("click", addProjectsToPage);
 
   projectContainer.appendChild(div);
+  console.log("projects innnn");
+  console.log(projects);
 }
 
 export function createTodoListContainer() {
@@ -108,7 +112,9 @@ export function createIndividualTodoContainer(
   const todoDetails = document.createElement("span");
   todoDetails.innerText = details;
   const dateDisplayDiv = document.createElement("div");
-  dateDisplayDiv.innerText = date;
+  date === ""
+    ? (dateDisplayDiv.innerText = "No due date")
+    : (dateDisplayDiv.innerText = date);
   const todoIsImportant = document.createElement("div");
 
   const todoRemove = document.createElement("div");
@@ -183,6 +189,8 @@ export function createIndividualTodoContainer(
   });
 
   todoEdit.addEventListener("click", () => {
+    const addTaskForm = document.querySelector(".add-task-form");
+
     editTaskPopup.style.display = "block";
     createIndividualTodoContainer.todoEditAccess = order;
 

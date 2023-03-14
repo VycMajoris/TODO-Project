@@ -5,7 +5,7 @@ import {
   createIndividualTodoContainer,
 } from "./create_element";
 
-import { projects, createTodosFunc } from "./projects";
+import { projects, createTodosFunc, projectNamesArray } from "./projects";
 
 /* Some event listeners are created in create_element.js */
 
@@ -22,45 +22,22 @@ export function eventsFunc() {
     addProjectPopupDiv.style.display = "none";
   });
 
-  const addBtn = document.querySelector(".add-btn");
-
-  addBtn.addEventListener("click", () => {
-    addProjectPopupDiv.style.display = "none";
-  });
-
   const addProjectForm = document.querySelector(".add-project-form");
   const addTaskForm = document.querySelector(".add-task-form");
   const editTaskForm = document.querySelector(".edit-task-form");
 
   addProjectForm.addEventListener("submit", (e) => {
     e.preventDefault();
-    createProjectDiv(projectNameInput.value);
-    projectNameInput.value = "";
-    /* projects.push(projectNameInput.value); */
-    /* console.log(projects); */
-  });
-
-  /*   addTaskForm.addEventListener("submit", (e) => {
-    e.preventDefault();
-    const addTaskBtn = document.querySelector(".add-task-btn");
-    const projectName = addTaskBtn.id;
-    const title = document.getElementById("title");
-    const details = document.getElementById("details");
-    const date = document.getElementById("date");
-    let project = projects.find((p) => p.projectTitle === projectName);
-    if (!project) {
-      project = {
-        projectTitle: projectName,
-        tasks: [],
-      };
-      projects.push(project);
+    console.log("projectNamesArray");
+    console.log(projectNamesArray);
+    if (!projectNamesArray.includes(projectNameInput.value)) {
+      projectNamesArray.push(projectNameInput.value);
+      createProjectDiv(projectNameInput.value);
     }
-    project.tasks.push(
-      createTodosFunc(title.value, details.value, date.value, false, false)
-    );
+
     projectNameInput.value = "";
-    addProjectsToPage();
-  }); */
+    addProjectPopupDiv.style.display = "none";
+  });
 
   addTaskForm.addEventListener("submit", submitForm);
 
@@ -94,7 +71,6 @@ export function eventsFunc() {
 // Submit Form:
 export function submitForm(e) {
   e.preventDefault();
-
   const addTaskBtn = document.querySelector(".add-task-btn");
   const projectName = addTaskBtn.id;
   const title = document.getElementById("title");
@@ -146,11 +122,59 @@ export function editForm(e) {
   const project = projects.find((p) => p.projectTitle === addTaskBtn.id);
   const task = project.tasks.find((t) => t.index === todoEdit);
 
-  console.log("editForm Trigger");
-
   task.title = editedTitle.value;
   task.details = editedDetails.value;
   task.date = editedDate.value;
 
   addProjectsToPage();
+}
+
+// All tasks filter
+
+const allTasksFilter = document.querySelector(".all-tasks-filter");
+const tasksContainer = document.querySelector(".tasks-container");
+const projectNameDisplay = document.querySelector(".filter-display-div");
+
+allTasksFilter.addEventListener("click", () => {
+  projectNameDisplay.innerHTML = "All Tasks";
+  tasksContainer.innerText = "";
+  for (let i = 0; i < projects.length; i++) {
+    for (let j = 0; j < projects[i].tasks.length; j++) {
+      createIndividualTodoContainer(
+        projects[i].tasks[j].title,
+        projects[i].tasks[j].details,
+        projects[i].tasks[j].date,
+        projects[i].tasks[j].complete,
+        projects[i].tasks[j].important,
+        i
+      );
+    }
+  }
+});
+
+// Important filter
+
+const importantFilter = document.querySelector(".important-filter");
+
+importantFilter.addEventListener("click", importantFilterFunc);
+
+export function importantFilterFunc() {
+  const addTaskBtn = document.querySelector(".add-task-btn");
+
+  projectNameDisplay.innerHTML = "Important Tasks";
+  tasksContainer.innerText = "";
+  for (let i = 0; i < projects.length; i++) {
+    for (let j = 0; j < projects[i].tasks.length; j++) {
+      if (projects[i].tasks[j].important === true) {
+        createIndividualTodoContainer(
+          projects[i].tasks[j].title,
+          projects[i].tasks[j].details,
+          projects[i].tasks[j].date,
+          projects[i].tasks[j].complete,
+          projects[i].tasks[j].important,
+          i
+        );
+      }
+    }
+  }
 }

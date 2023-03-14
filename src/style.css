@@ -241,11 +241,20 @@ main {
   gap: 1rem;
 }
 
+.filter-display-div {
+  font-size: max(3rem, 100%);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
 /**** TASK POPUP ****/
 
 .task-popup,
 .edit-task-popup {
   display: none;
+  width: 100ch;
+  align-self: center;
 }
 
 .add-task-form,
@@ -253,6 +262,13 @@ main {
   display: flex;
   flex-direction: column;
   gap: 0.25rem;
+}
+
+.add-task-btn {
+  width: max-content;
+  margin-left: auto;
+  margin-right: auto;
+  padding: 0.5rem 1rem;
 }
 
 .task-btn-container {

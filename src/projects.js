@@ -11,7 +11,7 @@ export function createTodosFunc(
   return { title, details, date, complete, important, index };
 }
 
-export function editProjectsObject(titleVal, detailsVal, dateVal, todoEdit) {}
+export const projectNamesArray = [];
 /* 
 export const projects = [
   {
