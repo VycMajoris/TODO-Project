@@ -75,7 +75,9 @@ export function createIndividualTodoContainer(
   date,
   complete,
   important,
-  order
+  order,
+  projectName,
+  removeEvents
 ) {
   const taskPopup = document.querySelector(".task-popup");
   const editTaskPopup = document.querySelector(".edit-task-popup");
@@ -136,6 +138,9 @@ export function createIndividualTodoContainer(
   starCheckedBtn.src = StarCheckedIcon;
   const starUncheckedBtn = new Image();
   starUncheckedBtn.src = StarUncheckedIcon;
+  const projectNameDisplay = document.createElement("div");
+  projectNameDisplay.innerText = projectName;
+  projectNameDisplay.style.marginRight = "2rem";
 
   if (complete) {
     todoIsCompleted.appendChild(radioCheckedBtn);
@@ -156,6 +161,7 @@ export function createIndividualTodoContainer(
   leftSide.appendChild(todoTitle);
   leftSide.appendChild(todoDetails);
 
+  rightSide.appendChild(projectNameDisplay);
   rightSide.appendChild(dateDisplayDiv);
   rightSide.appendChild(todoIsImportant);
   rightSide.appendChild(todoEdit);
@@ -166,27 +172,31 @@ export function createIndividualTodoContainer(
 
   tasksContainer.appendChild(todoDisplayContainer);
 
-  todoIsCompleted.addEventListener("click", () => {
-    /*   const project = projects.find((p) => p.projectTitle === addTaskBtn.id); */
+  if (!removeEvents) {
+    todoIsCompleted.addEventListener("click", () => {
+      /*   const project = projects.find((p) => p.projectTitle === addTaskBtn.id); */
 
-    if (project.tasks[order].complete === true) {
-      project.tasks[order].complete = false;
-    } else if (project.tasks[order].complete === false) {
-      project.tasks[order].complete = true;
-    }
+      if (project.tasks[order].complete === true) {
+        project.tasks[order].complete = false;
+      } else if (project.tasks[order].complete === false) {
+        project.tasks[order].complete = true;
+      }
 
-    addProjectsToPage();
-  });
+      addProjectsToPage();
+    });
+  }
 
-  todoIsImportant.addEventListener("click", () => {
-    if (project.tasks[order].important === true) {
-      project.tasks[order].important = false;
-    } else if (project.tasks[order].important === false) {
-      project.tasks[order].important = true;
-    }
+  if (!removeEvents) {
+    todoIsImportant.addEventListener("click", () => {
+      if (project.tasks[order].important === true) {
+        project.tasks[order].important = false;
+      } else if (project.tasks[order].important === false) {
+        project.tasks[order].important = true;
+      }
 
-    addProjectsToPage();
-  });
+      addProjectsToPage();
+    });
+  }
 
   todoEdit.addEventListener("click", () => {
     const addTaskForm = document.querySelector(".add-task-form");
@@ -226,7 +236,8 @@ export function addProjectsToPage() {
         project.tasks[i].date,
         project.tasks[i].complete,
         project.tasks[i].important,
-        i
+        i,
+        project.projectTitle
       );
     }
   } else {

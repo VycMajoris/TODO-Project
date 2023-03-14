@@ -138,6 +138,7 @@ const projectNameDisplay = document.querySelector(".filter-display-div");
 allTasksFilter.addEventListener("click", () => {
   projectNameDisplay.innerHTML = "All Tasks";
   tasksContainer.innerText = "";
+
   for (let i = 0; i < projects.length; i++) {
     for (let j = 0; j < projects[i].tasks.length; j++) {
       createIndividualTodoContainer(
@@ -146,7 +147,10 @@ allTasksFilter.addEventListener("click", () => {
         projects[i].tasks[j].date,
         projects[i].tasks[j].complete,
         projects[i].tasks[j].important,
-        i
+        i,
+        projects[i].projectTitle,
+        // remove event listeners from buttons
+        true
       );
     }
   }
@@ -172,7 +176,10 @@ export function importantFilterFunc() {
           projects[i].tasks[j].date,
           projects[i].tasks[j].complete,
           projects[i].tasks[j].important,
-          i
+          i,
+          projects[i].projectTitle,
+          // remove event listeners from buttons
+          true
         );
       }
     }
