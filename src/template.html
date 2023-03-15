@@ -78,7 +78,15 @@
                   name="taskDetails"
                 />
                 <label for="date">Date:</label>
-                <input type="date" name="taskDate" id="date" />
+                <input
+                  type="date"
+                  name="taskDate"
+                  id="date"
+                  pattern="\d{2}-\d{2}-\d{4}"
+                  required
+                  min="0000-00-00"
+                  max="2100-01-01"
+                />
                 <div class="task-btn-container">
                   <button class="add-task-form-btn" type="submit">Add</button>
                   <button class="form-cancel-btn" type="reset">Cancel</button>
@@ -103,7 +111,15 @@
                   name="taskDetails"
                 />
                 <label for="date">Date:</label>
-                <input type="date" name="taskDate" id="edit-date" />
+                <input
+                  type="date"
+                  name="taskDate"
+                  id="edit-date"
+                  pattern="\d{2}-\d{2}-\d{4}"
+                  required
+                  min="0000-00-00"
+                  max="2100-01-01"
+                />
                 <div class="task-btn-container">
                   <button class="edit-task-form-btn" type="submit">Edit</button>
                   <button class="edit-form-cancel-btn" type="reset">

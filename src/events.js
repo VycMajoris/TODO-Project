@@ -5,7 +5,12 @@ import {
   createIndividualTodoContainer,
 } from "./create_element";
 
-import { projects, createTodosFunc, projectNamesArray } from "./projects";
+import {
+  projects,
+  createTodosFunc,
+  projectNamesArray,
+  dateFormatter,
+} from "./projects";
 
 /* Some event listeners are created in create_element.js */
 
@@ -92,7 +97,7 @@ export function submitForm(e) {
     createTodosFunc(
       title.value,
       details.value,
-      date.value,
+      dateFormatter(date.value).finalDate,
       false,
       false,
       project.tasks.length
@@ -124,7 +129,7 @@ export function editForm(e) {
 
   task.title = editedTitle.value;
   task.details = editedDetails.value;
-  task.date = editedDate.value;
+  task.date = dateFormatter(editedDate.value).finalDate;
 
   addProjectsToPage();
 }
@@ -159,17 +164,82 @@ allTasksFilter.addEventListener("click", () => {
 // Important filter
 
 const importantFilter = document.querySelector(".important-filter");
-
 importantFilter.addEventListener("click", importantFilterFunc);
 
 export function importantFilterFunc() {
-  const addTaskBtn = document.querySelector(".add-task-btn");
-
   projectNameDisplay.innerHTML = "Important Tasks";
   tasksContainer.innerText = "";
   for (let i = 0; i < projects.length; i++) {
     for (let j = 0; j < projects[i].tasks.length; j++) {
       if (projects[i].tasks[j].important === true) {
+        createIndividualTodoContainer(
+          projects[i].tasks[j].title,
+          projects[i].tasks[j].details,
+          projects[i].tasks[j].date,
+          projects[i].tasks[j].complete,
+          projects[i].tasks[j].important,
+          i,
+          projects[i].projectTitle,
+          // remove event listeners from buttons
+          true
+        );
+      }
+    }
+  }
+}
+
+const options = {
+  timeZone: "Europe/Istanbul",
+  year: "numeric",
+  month: "2-digit",
+  day: "2-digit",
+};
+const today = new Date()
+  .toLocaleDateString("en-US", options)
+  .replace(/\//g, "-");
+
+// Today filter
+
+const todayFilter = document.querySelector(".today-filter");
+todayFilter.addEventListener("click", todayFilterFunc);
+
+export function todayFilterFunc() {
+  projectNameDisplay.innerHTML = "Tasks of the day";
+  tasksContainer.innerText = "";
+  for (let i = 0; i < projects.length; i++) {
+    for (let j = 0; j < projects[i].tasks.length; j++) {
+      if (projects[i].tasks[j].date === today) {
+        createIndividualTodoContainer(
+          projects[i].tasks[j].title,
+          projects[i].tasks[j].details,
+          projects[i].tasks[j].date,
+          projects[i].tasks[j].complete,
+          projects[i].tasks[j].important,
+          i,
+          projects[i].projectTitle,
+          // remove event listeners from buttons
+          true
+        );
+      }
+    }
+  }
+}
+
+// 7 Days filter
+
+const sevenDaysFilter = document.querySelector(".seven-days-filter");
+sevenDaysFilter.addEventListener("click", sevenDaysFilterFunc);
+
+export function sevenDaysFilterFunc() {
+  projectNameDisplay.innerHTML = "Tasks this week";
+  tasksContainer.innerText = "";
+  for (let i = 0; i < projects.length; i++) {
+    for (let j = 0; j < projects[i].tasks.length; j++) {
+      const date1 = new Date(projects[i].tasks[j].date);
+      const date2 = new Date();
+      const oneWeekMs = 7 * 24 * 60 * 60 * 1000;
+      const diffMs = date1 - date2;
+      if (diffMs <= oneWeekMs) {
         createIndividualTodoContainer(
           projects[i].tasks[j].title,
           projects[i].tasks[j].details,
