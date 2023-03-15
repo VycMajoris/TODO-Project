@@ -158,6 +158,7 @@ main {
   padding: 0.25rem 0.75rem;
   max-width: max-content;
   align-self: center;
+  cursor: pointer;
 }
 
 .add-project-form {
@@ -176,6 +177,7 @@ main {
   display: inline-block;
   justify-content: center;
   align-items: center;
+  cursor: pointer;
 }
 
 .add-project-popup-div {
@@ -183,11 +185,27 @@ main {
 }
 
 .individual-project-container {
-  width: 80%;
+  display: flex;
+  align-items: center;
+  width: 90%;
   height: 2rem;
   margin: 1rem;
-  background-color: red;
+  padding: 0.5rem;
+  border: 2px solid white;
   color: white;
+}
+
+.individual-project-container:hover {
+  background-color: rgba(107, 105, 105, 0.2);
+  cursor: pointer;
+}
+
+.all-tasks-filter:hover,
+.today-filter:hover,
+.seven-days-filter:hover,
+.important-filter:hover {
+  background-color: rgba(107, 105, 105, 0.2);
+  cursor: pointer;
 }
 
 /****** Right Panel *****/

@@ -10,9 +10,12 @@ import {
   createTodosFunc,
   projectNamesArray,
   dateFormatter,
+  projectsEdited,
 } from "./projects";
 
 /* Some event listeners are created in create_element.js */
+
+const todoListContainer = document.querySelector(".todo-list-container");
 
 export function eventsFunc() {
   const addProjectBtn = document.querySelector(".add-project-btn");
@@ -33,8 +36,7 @@ export function eventsFunc() {
 
   addProjectForm.addEventListener("submit", (e) => {
     e.preventDefault();
-    console.log("projectNamesArray");
-    console.log(projectNamesArray);
+
     if (!projectNamesArray.includes(projectNameInput.value)) {
       projectNamesArray.push(projectNameInput.value);
       createProjectDiv(projectNameInput.value);
@@ -109,6 +111,9 @@ export function submitForm(e) {
   title.value = "";
   details.value = "";
   date.value = "";
+  projectsEdited();
+  console.log("projects in submitForm.js:");
+  console.log(projects);
 }
 
 // Edit Form:
@@ -132,6 +137,7 @@ export function editForm(e) {
   task.date = dateFormatter(editedDate.value).finalDate;
 
   addProjectsToPage();
+  projectsEdited();
 }
 
 // All tasks filter
@@ -141,6 +147,8 @@ const tasksContainer = document.querySelector(".tasks-container");
 const projectNameDisplay = document.querySelector(".filter-display-div");
 
 allTasksFilter.addEventListener("click", () => {
+  const addTaskBtn = document.querySelector(".add-task-btn");
+  if (addTaskBtn) addTaskBtn.style.opacity = "0";
   projectNameDisplay.innerHTML = "All Tasks";
   tasksContainer.innerText = "";
 
@@ -167,6 +175,8 @@ const importantFilter = document.querySelector(".important-filter");
 importantFilter.addEventListener("click", importantFilterFunc);
 
 export function importantFilterFunc() {
+  const addTaskBtn = document.querySelector(".add-task-btn");
+  addTaskBtn.style.opacity = "0";
   projectNameDisplay.innerHTML = "Important Tasks";
   tasksContainer.innerText = "";
   for (let i = 0; i < projects.length; i++) {
@@ -204,6 +214,8 @@ const todayFilter = document.querySelector(".today-filter");
 todayFilter.addEventListener("click", todayFilterFunc);
 
 export function todayFilterFunc() {
+  const addTaskBtn = document.querySelector(".add-task-btn");
+  addTaskBtn.style.opacity = "0";
   projectNameDisplay.innerHTML = "Tasks of the day";
   tasksContainer.innerText = "";
   for (let i = 0; i < projects.length; i++) {
@@ -231,6 +243,8 @@ const sevenDaysFilter = document.querySelector(".seven-days-filter");
 sevenDaysFilter.addEventListener("click", sevenDaysFilterFunc);
 
 export function sevenDaysFilterFunc() {
+  const addTaskBtn = document.querySelector(".add-task-btn");
+  addTaskBtn.style.opacity = "0";
   projectNameDisplay.innerHTML = "Tasks this week";
   tasksContainer.innerText = "";
   for (let i = 0; i < projects.length; i++) {

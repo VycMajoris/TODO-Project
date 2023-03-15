@@ -12,7 +12,7 @@ import { submitForm } from "./events";
 
 var md5 = require("md5");
 
-export function createProjectDiv(text) {
+export function createProjectDiv(text, initial) {
   const projectNameDisplay = document.querySelector(".filter-display-div");
   const div = document.createElement("div");
   const projectContainer = document.querySelector(".project-names-container");
@@ -40,8 +40,6 @@ export function createProjectDiv(text) {
   div.addEventListener("click", addProjectsToPage);
 
   projectContainer.appendChild(div);
-  console.log("projects innnn");
-  console.log(projects);
 }
 
 export function createTodoListContainer() {
@@ -61,10 +59,11 @@ export function createTaskAddBtn(divText) {
   button.innerHTML = "Add Task";
   button.id = divText;
 
-  button.addEventListener("click", () => {
-    console.log(taskPopup);
+  button.addEventListener("click", addTaskBtnEvent);
+
+  function addTaskBtnEvent() {
     taskPopup.style.display = "block";
-  });
+  }
   const todoListContainer = document.querySelector(".todo-list-container");
   todoListContainer.appendChild(button);
 }
@@ -94,9 +93,6 @@ export function createIndividualTodoContainer(
   todoEdit.setAttribute("class", order);
   todoEdit.setAttribute("data-custom", "todoEditData");
 
-  console.log("createIndividualTodoContainer.todoEditAccess");
-  console.log(createIndividualTodoContainer.todoEditAccess);
-
   // const dataCustomEdit = todoEdit.getAttribute("data-custom-edit");
   const task = project.tasks.find((t) => t.index === order);
 
@@ -120,6 +116,7 @@ export function createIndividualTodoContainer(
   const todoIsImportant = document.createElement("div");
 
   const todoRemove = document.createElement("div");
+  todoRemove.setAttribute("class", order);
 
   const radioUncheckedBtn = new Image();
   radioUncheckedBtn.src = RadioUncheckedIcon;
@@ -198,22 +195,39 @@ export function createIndividualTodoContainer(
     });
   }
 
-  todoEdit.addEventListener("click", () => {
-    const addTaskForm = document.querySelector(".add-task-form");
+  if (!removeEvents) {
+    todoRemove.addEventListener("click", () => {
+      const selectProject = projects.find(
+        (p) => p.projectTitle === addTaskBtn.id
+      );
+      const removeTask = project.tasks.find((t) => t.index === order);
+      selectProject.tasks.splice(removeTask.index, 1);
+      addProjectsToPage();
+    });
+  }
 
-    editTaskPopup.style.display = "block";
-    createIndividualTodoContainer.todoEditAccess = order;
+  if (!removeEvents) {
+    todoEdit.addEventListener("click", () => {
+      const addTaskForm = document.querySelector(".add-task-form");
 
-    const titleInput = document.getElementById("edit-title");
-    const detailsInput = document.getElementById("edit-details");
-    const dateInput = document.getElementById("edit-date");
+      editTaskPopup.style.display = "block";
+      createIndividualTodoContainer.todoEditAccess = order;
 
-    titleInput.value = task.title;
-    detailsInput.value = task.details;
-    dateInput.value = task.date;
+      const titleInput = document.getElementById("edit-title");
+      const detailsInput = document.getElementById("edit-details");
+      const dateInput = document.getElementById("edit-date");
 
-    const editTaskForm = document.querySelector(".edit-task-form");
-    const event = new Event("submit");
+      titleInput.value = task.title;
+      detailsInput.value = task.details;
+      dateInput.value = task.date;
+
+      /*    const editTaskForm = document.querySelector(".edit-task-form");
+    const event = new Event("submit"); */
+    });
+  }
+
+  todoRemove.addEventListener("click", () => {
+    createIndividualTodoContainer.todoRemoveAccess = order;
   });
 
   /*   todoEdit.addEventListener("submit", () => {

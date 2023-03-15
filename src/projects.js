@@ -8,6 +8,9 @@ export function createTodosFunc(
   important,
   index
 ) {
+  console.log("projects in THERE.js:");
+  console.log(projects);
+
   return { title, details, date, complete, important, index };
 }
 
@@ -22,6 +25,16 @@ export function dateFormatter(dateValue) {
   const formattedDate = month.concat(day).concat(dash).concat(year);
   const finalDate = formattedDate.join("");
   return { finalDate, day };
+}
+
+console.log("projects in projects.js:");
+console.log(projects);
+
+// will be called for modifying Local storage
+
+export function projectsEdited() {
+  const projectsLocalStorage = JSON.stringify(projects);
+  localStorage.setItem("projectsKey", projectsLocalStorage);
 }
 
 /* 
